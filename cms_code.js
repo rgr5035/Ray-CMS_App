@@ -67,18 +67,30 @@ const initSearch = () => {
 const viewAllEmployees = () => {
     console.log("testing");
     //SELECT LEFT JOIN
+    const query = "SELECT * FROM employee LEFT JOIN role  ";
+    connection.query(query, (err, res) => {
+
+    })
     initSearch(); 
 };
 
 const viewAllRoles = () => {
     console.log("testing");
     //SELECT LEFT JOIN
+    const query = "";
+    connection.query(query, (err, res) => {
+
+    })
     initSearch();
 }
 
 const viewAllDepts = () => {
     console.log("testing");
     //SELECT LEFT JOIN
+    const query = "";
+    connection.query(query, (err, res) => {
+
+    })
     initSearch();
 }
 
@@ -147,6 +159,7 @@ const addDept = () => {
         })
         .then((data) => {
             //INSERT INTO CODE HERE?
+            const query = "INSERT INTO department WHERE "
         })
     // initSearch();
 }
@@ -167,7 +180,8 @@ const addEmployee = () => {
         },
         {
             type: "input",
-            message: ""
+            message: "",
+            name: "",
         })
     // initSearch();
 }
@@ -175,7 +189,11 @@ const addEmployee = () => {
 const updateEmployee = () => {
     console.log("testing");
     //UPDATE SET
-    initSearch();
+    // inquirer
+    //     .prompt({
+    //         type: ""
+    //     })
+    // initSearch();
 }
 
 
