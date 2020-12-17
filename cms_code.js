@@ -29,7 +29,7 @@ const initSearch = () => {
         .prompt({
             type: "rawlist",
             message: "What would you like to do?",
-            choices: ["View All Employees", "View All Roles", "View All Departments", "View Employees by Department", "Add Role", "Add Department", "Add Employee", "Update Employee"],
+            choices: ["View All Employees", "View All Roles", "View All Departments", "View Employees by Department", "Add Role", "Add Department", "Add Employee", "Update Employee Role", "Exit"],
             name: "choice",
         })
         .then((data) => {
@@ -55,51 +55,127 @@ const initSearch = () => {
                 case "Add Employee":
                     addEmployee();
                     break;
-                case "Update Employee":
+                case "Update Employee Role":
                     updateEmployee();
                     break;
+                case "Exit":
+                    connection.end();
             }
         })
   };
 
 const viewAllEmployees = () => {
     console.log("testing");
-    //SELECT LEFT JOIN 
+    //SELECT LEFT JOIN
+    initSearch(); 
 };
 
 const viewAllRoles = () => {
     console.log("testing");
     //SELECT LEFT JOIN
+    initSearch();
 }
 
 const viewAllDepts = () => {
     console.log("testing");
     //SELECT LEFT JOIN
+    initSearch();
 }
 
 const viewEmployeesByDept = () => {
     console.log("testing");
+    inquirer
+        .prompt({
+            type: "rawlist",
+            message: "Which department would you like to see?",
+            choices: ["Sales", "Engineering", "Finance", "Legal"],
+            name: "department",
+        })
+        .then((data) => {
+            switch (data.department) {
+                case "Sales":
+                    viewSales(); //or just the connection.query code, not sure yet
+                    break;
+                case "Engineering":
+                    viewEngineering(); //or just the connection.query code, not sure yet
+                    break;
+                case "Finance":
+                    viewFinance(); //or just the connection.query code, not sure yet
+                    break;
+                case "Legal":
+                    viewLegal(); //or just the connection.query code, not sure yet
+                    break;
+            }
+        })
     //
-}
+    // initSearch();
+};
 
 const addRole = () => {
     console.log("testing");
     //INSERT INTO
+    inquirer
+        .prompt({
+            type: "input",
+            message: "What new role title would you like to add?",
+            name: "newTitle",
+        },
+        {
+            type: "input",
+            message: "What is the salary of the new role? (Please use numbers only with no spaces or commas)",
+            name: "newSalary",
+        },
+        {
+            type: "input",
+            message: "Which department does this role belong to?", //Not sure about this question, confused
+            name: "deptId",
+        })
+        .then((data) => {
+            //INSERT INTO CODE HERE?
+        })
+    // initSearch();
 }
 
 const addDept = () => {
     console.log("testing");
     //INSERT INTO
+    inquirer
+        .prompt({
+            type: "input",
+            message: "What department would you like to add?",
+            name: "department",
+        })
+        .then((data) => {
+            //INSERT INTO CODE HERE?
+        })
+    // initSearch();
 }
 
 const addEmployee = () => {
     console.log("testing");
     //INSERT INTO
+    inquirer
+        .prompt({
+            type: "input",
+            message: "Please enter the new employee's first name:",
+            name: "firstName",
+        },
+        {
+            type: "input",
+            message: "Please enter the new employee's last name:",
+            name: "lastName",
+        },
+        {
+            type: "input",
+            message: ""
+        })
+    // initSearch();
 }
 
 const updateEmployee = () => {
     console.log("testing");
     //UPDATE SET
+    initSearch();
 }
 
 
