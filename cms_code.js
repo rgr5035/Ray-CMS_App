@@ -69,11 +69,12 @@ const viewAllEmployees = () => {
 
 const viewAllRoles = () => {
     console.log("testing");
-    //
+    //SELECT LEFT JOIN
 }
 
 const viewAllDepts = () => {
     console.log("testing");
+    //SELECT LEFT JOIN
 }
 
 const viewEmployeesByDept = () => {
@@ -83,18 +84,22 @@ const viewEmployeesByDept = () => {
 
 const addRole = () => {
     console.log("testing");
+    //INSERT INTO
 }
 
 const addDept = () => {
     console.log("testing");
+    //INSERT INTO
 }
 
 const addEmployee = () => {
     console.log("testing");
+    //INSERT INTO
 }
 
 const updateEmployee = () => {
     console.log("testing");
+    //UPDATE SET
 }
 
 
