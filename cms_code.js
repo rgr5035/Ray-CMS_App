@@ -90,7 +90,7 @@ const viewAllDepts = () => {
     //SELECT LEFT JOIN
     const query = "SELECT * FROM department";
     connection.query(query, (err, res) => {
-
+        
     })
     initSearch();
 }
