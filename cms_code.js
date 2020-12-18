@@ -65,29 +65,30 @@ const initSearch = () => {
   };
 
 const viewAllEmployees = () => {
-    console.log("testing");
     //SELECT LEFT JOIN
-    const query = "SELECT * FROM employee LEFT JOIN role  ";
+    const query = "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id";
     connection.query(query, (err, res) => {
-
+        if (err) throw err;
+        console.table(res);
+        initSearch();
     })
-    initSearch(); 
+     
 };
 
 const viewAllRoles = () => {
-    console.log("testing");
     //SELECT LEFT JOIN
-    const query = "";
+    const query = "SELECT * FROM role";
     connection.query(query, (err, res) => {
-
+        if (err) throw err;
+        console.table(res);
+        initSearch();
     })
-    initSearch();
-}
+};
 
 const viewAllDepts = () => {
     console.log("testing");
     //SELECT LEFT JOIN
-    const query = "";
+    const query = "SELECT * FROM department";
     connection.query(query, (err, res) => {
 
     })
