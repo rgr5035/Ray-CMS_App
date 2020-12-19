@@ -29,7 +29,7 @@ const initSearch = () => {
         .prompt({
             type: "rawlist",
             message: "What would you like to do?",
-            choices: ["View All Employees", "View All Roles", "View All Departments", "View Employees by Department", "Add Role", "Add Department", "Add Employee", "Update Employee Role", "Exit"],
+            choices: ["View All Employees", "View All Roles", "View All Departments", "View Employees by Department", "Add Department", "Add Role", "Add Employee", "Update Employee Role", "Exit"],
             name: "choice",
         })
         .then((data) => {
@@ -46,11 +46,11 @@ const initSearch = () => {
                 case "View Employees by Department":
                     viewEmployeesByDept();
                     break;
-                case "Add Role":
-                    addRole();
-                    break;
                 case "Add Department":
                     addDept();
+                    break;
+                case "Add Role":
+                    addRole();
                     break;
                 case "Add Employee":
                     addEmployee();
@@ -90,9 +90,11 @@ const viewAllDepts = () => {
     //SELECT LEFT JOIN
     const query = "SELECT * FROM department";
     connection.query(query, (err, res) => {
-        
+        if (err) throw err;
+        console.table(res);
+        initSearch();
     })
-    initSearch();
+    
 }
 
 const viewEmployeesByDept = () => {
@@ -124,6 +126,23 @@ const viewEmployeesByDept = () => {
     // initSearch();
 };
 
+const addDept = () => {
+    console.log("testing");
+    //INSERT INTO
+    inquirer
+        .prompt({
+            type: "input",
+            message: "What department would you like to add?",
+            name: "department",
+        })
+        .then((data) => {
+            //INSERT INTO CODE HERE?
+            const query = "INSERT INTO department WHERE "
+        })
+    // initSearch();
+}
+
+
 const addRole = () => {
     console.log("testing");
     //INSERT INTO
@@ -140,7 +159,7 @@ const addRole = () => {
         },
         {
             type: "input",
-            message: "Which department does this role belong to?", //Not sure about this question, confused
+            message: "Which department ID does this role belong to?", //Not sure about this question, confused
             name: "deptId",
         })
         .then((data) => {
@@ -149,21 +168,6 @@ const addRole = () => {
     // initSearch();
 }
 
-const addDept = () => {
-    console.log("testing");
-    //INSERT INTO
-    inquirer
-        .prompt({
-            type: "input",
-            message: "What department would you like to add?",
-            name: "department",
-        })
-        .then((data) => {
-            //INSERT INTO CODE HERE?
-            const query = "INSERT INTO department WHERE "
-        })
-    // initSearch();
-}
 
 const addEmployee = () => {
     console.log("testing");
