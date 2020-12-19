@@ -86,7 +86,6 @@ const viewAllRoles = () => {
 };
 
 const viewAllDepts = () => {
-    console.log("testing");
     //SELECT LEFT JOIN
     const query = "SELECT * FROM department";
     connection.query(query, (err, res) => {
@@ -98,7 +97,6 @@ const viewAllDepts = () => {
 }
 
 const viewEmployeesByDept = () => {
-    console.log("testing");
     inquirer
         .prompt({
             type: "rawlist",
@@ -127,7 +125,6 @@ const viewEmployeesByDept = () => {
 };
 
 const addDept = () => {
-    console.log("testing");
     //INSERT INTO
     inquirer
         .prompt({
@@ -148,7 +145,6 @@ const addDept = () => {
 
 
 const addRole = () => {
-    console.log("testing");
     //INSERT INTO
     inquirer
         .prompt([{
@@ -186,10 +182,9 @@ const addRole = () => {
 
 
 const addEmployee = () => {
-    console.log("testing");
     //INSERT INTO
     inquirer
-        .prompt({
+        .prompt([{
             type: "input",
             message: "Please enter the new employee's first name:",
             name: "firstName",
@@ -200,11 +195,32 @@ const addEmployee = () => {
             name: "lastName",
         },
         {
-            type: "input",
-            message: "",
-            name: "",
+            type: "number",
+            message: "Please enter the new employee's role ID:",
+            name: "roleID",
+        },
+        {
+            type: "number",
+            message: "Please enter the new employee's manager ID:",
+            name: "managerID",
+        }])
+        .then((data) => {
+            //INSERT INTO CODE HERE?
+            const query = "INSERT INTO employee SET ?"
+            connection.query(
+                query, 
+                { 
+                    first_name: data.firstName, 
+                    last_name: data.lastName,
+                    role_id: data.roleID,
+                    manager_id: data.managerID,
+                }, 
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(`${res.affectedRows} Employee has been added!`);
+                    initSearch();
+                })
         })
-    // initSearch();
 }
 
 const updateEmployee = () => {
