@@ -137,36 +137,52 @@ const addDept = () => {
         })
         .then((data) => {
             //INSERT INTO CODE HERE?
-            const query = "INSERT INTO department WHERE "
+            const query = "INSERT INTO department SET ?"
+            connection.query(query, { name: data.department }, (err, res) => {
+                if (err) throw err;
+                console.log(`${res.affectedRows} Department added!`);
+                initSearch();
+            })
         })
-    // initSearch();
-}
+};
 
 
 const addRole = () => {
     console.log("testing");
     //INSERT INTO
     inquirer
-        .prompt({
+        .prompt([{
             type: "input",
             message: "What new role title would you like to add?",
             name: "newTitle",
         },
         {
-            type: "input",
+            type: "number",
             message: "What is the salary of the new role? (Please use numbers only with no spaces or commas)",
             name: "newSalary",
         },
         {
-            type: "input",
+            type: "number",
             message: "Which department ID does this role belong to?", //Not sure about this question, confused
             name: "deptId",
-        })
+        }])
         .then((data) => {
             //INSERT INTO CODE HERE?
+            const query = "INSERT INTO role SET ?"
+            connection.query(
+                query, 
+                { 
+                    title: data.newTitle, 
+                    salary: data.newSalary,
+                    department_id: data.deptId,
+                }, 
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(`${res.affectedRows} Role has been added!`);
+                    initSearch();
+                })
         })
-    // initSearch();
-}
+};
 
 
 const addEmployee = () => {
