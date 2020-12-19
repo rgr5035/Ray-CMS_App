@@ -226,12 +226,44 @@ const addEmployee = () => {
 const updateEmployee = () => {
     console.log("testing");
     //UPDATE SET
-    // inquirer
-    //     .prompt({
-    //         type: ""
-    //     })
-    // initSearch();
-}
+    inquirer
+        .prompt([{
+            type: "input",
+            message: "Please enter the first name of the employee:",
+            name: "firstName",
+        },
+        {
+            type: "input",
+            message: "Please enter the last name of the employee:",
+            name: "lastName",
+        },
+        {
+            type: "number",
+            message: "Please enter the new role ID for the employee:",
+            name: "newRoleID",
+        }])
+        .then((data) => {
+            const query = "UPDATE employee SET ? WHERE ?";
+            connection.query(
+                query,
+                [
+                {
+                    role_id: data.newRoleID,
+                },
+                {
+                    first_name: data.firstName, 
+                },
+                {
+                    last_name: data.lastName,
+                },
+                ], 
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(`${res.affectedRows} Role has been updated!`);
+                    initSearch();
+                })
+        })
+};
 
 
 
