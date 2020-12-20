@@ -1,14 +1,6 @@
-DROP DATABASE IF EXISTS cms_db;
+--Database seed data entered into mySQL Workbench
 
-CREATE DATABASE cms_db;
-
-USE cms_db;
-
-CREATE TABLE department (
-	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    name VARCHAR(30) NULL
-);
-
+--Initial department value entry into department table
 INSERT INTO department 
 (name) 
 VALUES 
@@ -17,14 +9,7 @@ VALUES
 ("Finance"), 
 ("Legal");
 
-CREATE TABLE role (
-	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    title VARCHAR(30) NULL,
-    salary DECIMAL(10,2) NULL,
-    department_id INT, 
-    FOREIGN KEY (department_id) REFERENCES department(id) 
-);
-
+--Initial role value data entry into role table
 INSERT INTO role 
 (title, salary, department_id) 
 VALUES 
@@ -37,16 +22,7 @@ VALUES
 ("Legal Team Lead", 200000.00, 4), 
 ("Lawyer", 180000.00, 4); 
 
-CREATE TABLE employee (
-	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    first_name VARCHAR(30) NULL,
-    last_name VARCHAR(30) NULL,
-    role_id INT,
-    manager_id INT NULL,
-    FOREIGN KEY (role_id) REFERENCES role(id),
-    FOREIGN KEY (manager_id) REFERENCES employee(id)
-);
-
+--Initial employee value data entry into employee table
 INSERT INTO employee 
 (first_name, last_name, role_id, manager_id)
 VALUES
@@ -58,7 +34,3 @@ VALUES
 ("Fran", "Gibson", 6, 5),
 ("Ashley", "Howard", 7, null), 
 ("Vince", "Bridges", 8, 7);
-
-SELECT * FROM department;
-SELECT * FROM role;
-SELECT * FROM employee;
