@@ -30,7 +30,7 @@ const viewLogo = () => {
   console.log(
     logo({
         name: 'Employee Manager',
-        font: 'Small Isometric1',
+        font: 'Soft',
         lineChars: 10,
         padding: 2,
         margin: 3,
