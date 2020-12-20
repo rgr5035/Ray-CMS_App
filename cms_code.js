@@ -25,7 +25,7 @@ const connection = mysql.createConnection({
     initSearch();
   });
 
-
+//function to generate styling for start of application 
 const viewLogo = () => {
   console.log(
     logo({
@@ -80,6 +80,7 @@ const initSearch = () => {
         })
   };
 
+//function to view all employees with their role-specific data associated in a table format
 const viewAllEmployees = () => {
     //SELECT LEFT JOIN
     const query = "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id";
@@ -91,6 +92,7 @@ const viewAllEmployees = () => {
      
 };
 
+//functio to view the roles table data in a table format
 const viewAllRoles = () => {
     //SELECT LEFT JOIN
     const query = "SELECT * FROM role";
@@ -101,6 +103,7 @@ const viewAllRoles = () => {
     })
 };
 
+//function to view the dedpartment table data in a table format
 const viewAllDepts = () => {
     //SELECT LEFT JOIN
     const query = "SELECT * FROM department";
@@ -112,6 +115,7 @@ const viewAllDepts = () => {
     
 }
 
+//function to add a department into the department table
 const addDept = () => {
     //INSERT INTO
     inquirer
@@ -131,7 +135,7 @@ const addDept = () => {
         })
 };
 
-
+//function to add role into the role table
 const addRole = () => {
     //INSERT INTO
     inquirer
@@ -168,7 +172,7 @@ const addRole = () => {
         })
 };
 
-
+//function to add an employee into the employee table
 const addEmployee = () => {
     //INSERT INTO
     inquirer
@@ -211,7 +215,7 @@ const addEmployee = () => {
         })
 }
 
-
+//function to update employee role based on user's input
 const updateEmployee = () => {
     console.log("testing");
     //UPDATE SET
@@ -253,6 +257,3 @@ const updateEmployee = () => {
                 })
         })
 };
-
-
-
