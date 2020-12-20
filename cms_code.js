@@ -2,6 +2,7 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const cTable = require("console.table");
+const logo = require("asciiart-logo");
 
 //connection information
 const connection = mysql.createConnection({
@@ -20,8 +21,26 @@ const connection = mysql.createConnection({
   
   connection.connect((err) => {
     if (err) throw err;
+    viewLogo();
     initSearch();
   });
+
+
+const viewLogo = () => {
+  console.log(
+    logo({
+        name: 'Employee Manager',
+        font: 'Small Isometric1',
+        lineChars: 10,
+        padding: 2,
+        margin: 3,
+        borderColor: 'grey',
+        logoColor: 'bold-green',
+        textColor: 'green',
+    })
+    .render()
+)};
+
 
 //runs initial search of prompts for user to choose from, each will be directed to a new callback function based on user choice
 const initSearch = () => {
@@ -29,7 +48,7 @@ const initSearch = () => {
         .prompt({
             type: "rawlist",
             message: "What would you like to do?",
-            choices: ["View All Employees", "View All Roles", "View All Departments", "View Employees by Department", "Add Department", "Add Role", "Add Employee", "Update Employee Role", "Exit"],
+            choices: ["View All Employees", "View All Roles", "View All Departments", "Add Department", "Add Role", "Add Employee", "Update Employee Role", "Exit"],
             name: "choice",
         })
         .then((data) => {
@@ -42,9 +61,6 @@ const initSearch = () => {
                     break;
                 case "View All Departments":
                     viewAllDepts();
-                    break;
-                case "View Employees by Department":
-                    viewEmployeesByDept();
                     break;
                 case "Add Department":
                     addDept();
@@ -95,34 +111,6 @@ const viewAllDepts = () => {
     })
     
 }
-
-const viewEmployeesByDept = () => {
-    inquirer
-        .prompt({
-            type: "rawlist",
-            message: "Which department would you like to see?",
-            choices: ["Sales", "Engineering", "Finance", "Legal"],
-            name: "department",
-        })
-        .then((data) => {
-            switch (data.department) {
-                case "Sales":
-                    viewSales(); //or just the connection.query code, not sure yet
-                    break;
-                case "Engineering":
-                    viewEngineering(); //or just the connection.query code, not sure yet
-                    break;
-                case "Finance":
-                    viewFinance(); //or just the connection.query code, not sure yet
-                    break;
-                case "Legal":
-                    viewLegal(); //or just the connection.query code, not sure yet
-                    break;
-            }
-        })
-    //
-    // initSearch();
-};
 
 const addDept = () => {
     //INSERT INTO
@@ -222,6 +210,7 @@ const addEmployee = () => {
                 })
         })
 }
+
 
 const updateEmployee = () => {
     console.log("testing");
